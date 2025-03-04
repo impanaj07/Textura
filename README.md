@@ -34,8 +34,8 @@ You will also need an API key from Hugging Face. You can sign up and obtain your
 
 1. Clone the repository
    ```sh
-   git clone https://github.com/impanaj07/flask-huggingface-project.git
-   cd flask-huggingface-project
+   git clone https://github.com/impanaj07/Textura.git
+   cd Textura
    ```
 
 2. Create and activate a virtual environment
