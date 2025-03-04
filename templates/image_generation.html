@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Image Generation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-5">Text to Pixel Art Generation</h2>
+        <form method="post" action="{{ url_for('image_generation') }}">
+            <div class="mb-3">
+                <label for="imageinput" class="form-label">Enter Prompt for Image:</label>
+                <input type="text" class="form-control" name="imageinput" placeholder="Example: cat wearing sunglasses">
+            </div>
+            <button type="submit" class="btn btn-success">Generate Image</button>
+        </form>
+    </div>
+</body>
+</html>
