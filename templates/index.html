@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text Summarization & Image Generation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .btn-choice {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Welcome to Text Summarization & Image Generation App</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="#" class="btn btn-primary btn-choice" data-bs-toggle="modal" data-bs-target="#summarizationModal">Go to Text Summarization</a>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ url_for('image_generation') }}" class="btn btn-success btn-choice">Go to Image Generation</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Text Summarization Modal -->
+    <div class="modal fade" id="summarizationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <form method="post" action="{{ url_for('summarize') }}" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Text Summarization</h5>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" name="inputtext_" rows="5" placeholder="Enter text to summarize..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Summarize</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

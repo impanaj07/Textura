@@ -1,0 +1,54 @@
+# Byte-compiled / compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment (your 'text' folder likely contains venv files)
+text/
+venv/
+.env
+*.env
+
+# Flask & Python logs
+*.log
+
+# Local config files
+instance/
+*.sqlite3
+*.db
+*.bak
+
+# VSCode settings (optional)
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Pip dependency files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask cache and temp files
+*.swp
+*.swo
+*.~*
+
+# Jupyter Notebook checkpoints (if you use Jupyter for some experiments)
+.ipynb_checkpoints/
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+
+# IDE settings (optional)
+.idea/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
