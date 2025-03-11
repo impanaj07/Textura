@@ -5,9 +5,9 @@ from base64 import b64encode
 from PIL import Image
 import os
 
-API_KEY = "***REMOVED***"
-# TEXT_URL = "https://api-inference.huggingface.co/models/google/pegasus-large"
-TEXT_URL = "https://api-inference.huggingface.co/models/t5-small"
+API_KEY = ""
+TEXT_URL = "https://api-inference.huggingface.co/models/google/pegasus-large"
+# TEXT_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
 IMAGE_URL = "https://api-inference.huggingface.co/models/nerijs/pixel-art-xl"
 
 app = Flask(__name__)
