@@ -1,15 +1,20 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,send_file
 import requests
 import io
 from base64 import b64encode
 from PIL import Image
+import os
 
-API_KEY = ""
-TEXT_URL = "https://api-inference.huggingface.co/models/google/pegasus-lagitrge"
+API_KEY = "***REMOVED***"
+# TEXT_URL = "https://api-inference.huggingface.co/models/google/pegasus-large"
+TEXT_URL = "https://api-inference.huggingface.co/models/t5-small"
 IMAGE_URL = "https://api-inference.huggingface.co/models/nerijs/pixel-art-xl"
 
 app = Flask(__name__)
-
+IMAGE_DIR = "images"
+IMAGE_SIZE = (512, 512)
+if not os.path.exists(IMAGE_DIR):
+    os.makedirs(IMAGE_DIR)
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -19,15 +24,41 @@ def image_generation():
     if request.method == "POST":
         headers = {"Authorization": f"Bearer {API_KEY}"}
         text = request.form["imageinput"]
-        payload = {"inputs": f"pixel art, {text}"}
+        payload = {"inputs": f"pixel art, {text}",
+                "parameters": {
+                "width": IMAGE_SIZE[0],
+                "height": IMAGE_SIZE[1]
+            }   
+            }
         response = requests.post(IMAGE_URL, headers=headers, json=payload)
-        image_bytes = response.content
-        image = Image.open(io.BytesIO(image_bytes))
-        buffered = io.BytesIO()
-        image.save(buffered, format="PNG")
-        dataurl = "data:image/png;base64," + b64encode(buffered.getvalue()).decode("ascii")
-        return render_template("output.html", data={"image": dataurl})
+        
+        if response.status_code != 200:
+            return f"Error from image generation service: {response.status_code} - {response.text}", 500
+
+        try:
+            image_bytes = response.content
+            image = Image.open(io.BytesIO(image_bytes))
+
+            filename = "generated_image.png"
+            filepath = os.path.join(IMAGE_DIR, filename)
+            image.save(filepath, format="PNG")
+
+            # Convert image to base64 for rendering in HTML
+            buffered = io.BytesIO()
+            image.save(buffered, format="PNG")
+            dataurl = "data:image/png;base64," + b64encode(buffered.getvalue()).decode("ascii")
+
+            return render_template("output.html", data={"image": dataurl})
+
+        except Exception as e:
+            return f"Failed to process image: {str(e)}", 500
+
     return render_template("image_generation.html")
+
+@app.route("/download_image/<filename>")
+def download_image(filename):
+    filepath = os.path.join(IMAGE_DIR, filename)
+    return send_file(filepath, as_attachment=True)
 
 @app.route("/text-summarization", methods=["GET", "POST"])
 def summarize():
