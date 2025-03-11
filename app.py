@@ -5,7 +5,7 @@ from base64 import b64encode
 from PIL import Image
 import os
 
-API_KEY = ""
+API_KEY = "your-secret-key"
 TEXT_URL = "https://api-inference.huggingface.co/models/google/pegasus-large"
 # TEXT_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
 IMAGE_URL = "https://api-inference.huggingface.co/models/nerijs/pixel-art-xl"
